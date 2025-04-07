@@ -1,12 +1,12 @@
 import React from 'react'
-import Routes, { Route } from 'react-router-dom';
+import  { Route,Routes } from 'react-router-dom';
 import UserFormList from '../views-user/UserFormList';
 import UserFormStore from '../views-user/UserFormStore';
 import UserFormDestroy from '../views-user/UserFormDestroy';
 import UserFormShow from '../views-user/UserFormShow';
 import UserFormUpdate from '../views-user/UserFormUpdate';
 
-const Routes = () => {
+const Rotas = () => {
   return (
     <Routes>
         <Route path='/user/index' element ={<UserFormList/>}/>
@@ -18,4 +18,4 @@ const Routes = () => {
   )
 }
 
-export default Routes
+export default Rotas
