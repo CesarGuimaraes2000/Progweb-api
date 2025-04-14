@@ -41,6 +41,22 @@ body{
  1 rem = 16 pixels
 1 em = 16 pixels
 */
+input{
+  outline: 0;
+  background: #c9c1c1;
+  width: 100%;
+  border: 2px solid #f6f6f6;
+  margin: 0 0 15px 15px;
+  padding: 10px;
+  font-size: 14px;
+  border-radius: 15px;
+  transition: all 0.3s;
+  font-weight: 580;
+} 
+
+input:focus{
+  border: 2px solid #00a762
+}
 
 .btn-block{
 
@@ -49,7 +65,8 @@ body{
 .btn-add,
 .btn-show,
 .btn-edit,
-.btn-delete{
+.btn-delete,
+.btn-cancel{
   padding: 0.5rem 0.75rem;
   font-size: 14px;
   border-radius: 5px;
@@ -67,6 +84,10 @@ body{
   background-color: rgb(59,59,90);
 }
 
+.btn-cancel{
+  background-color: rgb(40,40,106);
+  color: #000000;
+}
 /*estilos da tabela*/
 table{
   width: 100%;

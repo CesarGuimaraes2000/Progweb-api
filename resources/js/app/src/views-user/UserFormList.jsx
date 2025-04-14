@@ -52,13 +52,13 @@ export default function UserFormList(){
                                         <td>{user.name}</td>
                                         <td>{user.email}</td>
                                         <td className="center actions">
-                                            <Link className ="btn-edit" to ="/user/update" >Update</Link>
+                                            <Link className ="btn-edit" to = {`/user/update/${user.id}`} >Update</Link>
                                         </td>
                                         <td className="center actions">
-                                            <Link className ="btn-delete" to ="/user/destroy" >Destroy</Link>
+                                            <Link className ="btn-delete" to = {`/user/destroy/${user.id}`} >Destroy</Link>
                                         </td>
                                         <td className="center actions">
-                                            <Link className ="btn-show" to ="/user/show" >Show</Link>
+                                            <Link className ="btn-show" to ={`/user/show/${user.id}`} >Show</Link>
                                         </td>
                                     </tr>
                                 ))

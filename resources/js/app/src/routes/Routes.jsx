@@ -11,9 +11,9 @@ const Rotas = () => {
     <Routes>
         <Route path='/user/index' element ={<UserFormList/>}/>
         <Route path='/user/store' element ={<UserFormStore/>}/>
-        <Route path='/user/destroy' element ={<UserFormDestroy/>}/>
-        <Route path='/user/show' element ={<UserFormShow/>}/>
-        <Route path='/user/update' element ={<UserFormUpdate/>}/>
+        <Route path='/user/destroy/:id' element ={<UserFormDestroy/>}/>
+        <Route path='/user/show/:id' element ={<UserFormShow/>}/>
+        <Route path='/user/update/:id' element ={<UserFormUpdate/>}/>
     </Routes>
   )
 }
