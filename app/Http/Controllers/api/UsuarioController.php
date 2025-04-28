@@ -92,8 +92,7 @@ class UsuarioController extends Controller
     public function update(Request $request, string $id){
         $validator = Validator::make($request->all(),[
             'name'=>'required|string|max:255',
-            'email'=>'required|string|max:255|email|unique:users,email',
-            'password'=>'required|string|max:255|min:6',
+            'email'=>'required|string|max:255|email|unique:users,email,'.$id,
         ]);
 
         if($validator->fails()){
