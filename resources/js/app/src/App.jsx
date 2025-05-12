@@ -9,7 +9,9 @@ function App() {
 
   return (
     <>
-     <Rotas/>
+    <ContextProvider>
+      <Rotas/>
+    </ContextProvider>
     </>
   )
 }

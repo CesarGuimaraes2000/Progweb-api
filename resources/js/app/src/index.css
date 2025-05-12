@@ -22,7 +22,7 @@ body{
 }
 
 /*estilos gerais dos botões*/
-.btn
+.btn,
 .btn-add,
 .btn-show,
 .btn-edit,
@@ -35,6 +35,7 @@ body{
   padding: 15px;
   font-size: 18px;
   cursor: point;
+  border-radius: 0,5rem;
 }
 
 /*
@@ -240,7 +241,7 @@ th.actions, td.actions{
 
 .login-signup-form .form{
   width: 770px;
-  margin-top: 75px;
+  margin-top: 70px;
   position: relative;
   z-index: 100;
   background-color: #d3ffd342;
@@ -250,11 +251,23 @@ th.actions, td.actions{
   box-shadow: 0 0 2px 0 #212121;
 }
 
-.p-20{
-  margin-bottom: 20px;
+.login-signup-form .form .message{
+  margin: 1rem;
+  color: #000000;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.login-signup-form .form .message a {
+  color: #4528e9;
+  text-decoration: none;
 }
 
 .login-signup-form .title{
   font-size: 2rem;
   text-align: center;
+}
+
+.p-20{
+  margin-bottom: 20px;
 }
