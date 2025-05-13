@@ -11,10 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('editoras', function (Blueprint $table) {
-            $table->increments('id')->unsigned;
-            $table->string('nome',100);
-            
+        Schema::create('categorias', function (Blueprint $table) {
+            $table->id();
+            $table->string('nome');
             $table->timestamps();
         });
     }
@@ -24,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('editoras');
+        Schema::dropIfExists('categorias');
     }
 };

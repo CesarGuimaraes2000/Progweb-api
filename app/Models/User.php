@@ -49,8 +49,4 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
-
-    public function Dono(){
-        $this->hasOne(Dono::class);
-    }
 }

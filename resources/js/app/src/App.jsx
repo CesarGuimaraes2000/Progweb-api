@@ -9,9 +9,9 @@ function App() {
 
   return (
     <>
-    <ContextProvider>
+    {/* <ContextProvider> */}
       <Rotas/>
-    </ContextProvider>
+    {/* </ContextProvider> */}
     </>
   )
 }

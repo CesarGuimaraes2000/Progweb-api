@@ -1,10 +1,10 @@
 import { Fragment, useEffect } from "react";
-import axiosClient from "../AxiosClient";
+import axiosClient from "../../AxiosClient";
 import { useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
 import { Link } from 'react-router-dom';
 
-export default function UserFormDestroy(){
+export default function UserFormUpdate(){
     const navigate = useNavigate();
     const [user, setUser] = useState({
         id: null,
@@ -26,9 +26,10 @@ export default function UserFormDestroy(){
     }
     const onSubmit = (e) =>{
         e.preventDefault();
-        axiosClient.delete(`/user/destroy/${id}`)
+        axiosClient.put(`/user/update/${id}`, user)
             .then(()=>{
              setUser({});
+             console.log("Usuário alterado com sucesso");
              navigate('/user/index');
             })
             .catch((error)=>{
@@ -42,15 +43,25 @@ export default function UserFormDestroy(){
         <Fragment>
             <div className = "display">
                 <div className="card animated fadeinDown">
-                    {user.id && <h1>Exclusão de Usuário: {user.name}</h1>}
+                    {user.id && <h1>Alteração de Usuário</h1>}
                     <form onSubmit={(e) => onSubmit(e)}>
-                        <input defaultValue={user.name} placeholder="Nome do Usuário" readOnly={true}/>
-                        <input defaultValue={user.email} placeholder="Email do Usuário"readOnly={true}/>
+                        <input value={user.name} placeholder="Nome do Usuário"
+                        onChange={
+                            e => setUser({
+                                ...user, name:e.target.value
+                            })
+                        }/>
+                        <input value={user.email} placeholder="Email do Usuário"
+                        onChange={
+                            e => setUser({
+                                ...user, email:e.target.value
+                            })
+                        }/>
                         <Link type="button" className = "btn btn-cancel"
                             to ="/user/index">
                             Cancelar
                         </Link>
-                        <button className="btn-delete">Excluir</button>
+                        <button className="btn-edit">Atualizar</button>
                     </form>
                 </div>
             </div>

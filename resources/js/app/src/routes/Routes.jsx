@@ -1,17 +1,17 @@
 import React from 'react'
 import  { Route,Routes } from 'react-router-dom';
-import UserFormList from '../views-user/UserFormList';
-import UserFormStore from '../views-user/UserFormStore';
-import UserFormDestroy from '../views-user/UserFormDestroy';
-import UserFormShow from '../views-user/UserFormShow';
-import UserFormUpdate from '../views-user/UserFormUpdate';
+import UserFormList from '../views/user/UserFormList';
+import UserFormStore from '../views/user/UserFormStore';
+import UserFormDestroy from '../views/user/UserFormDestroy';
+import UserFormShow from '../views/user/UserFormShow';
+import UserFormUpdate from '../views/user/UserFormUpdate';
 import Layout from './Layout';
 import Dashboard from '../components/Dashboard';
-import NotFound from '../views-user/NotFound';
-import Login from '../views-user/login/Login';
-import SignUp from '../views-user/login/SignUp';
-import UpdatePassword from '../views-user/login/UpdatePassword';
-import ForgotPassword from '../views-user/login/ForgotPassword';
+import NotFound from '../views/NotFound';
+import Login from '../views/login/Login';
+import SignUp from '../views/login/SignUp';
+import UpdatePassword from '../views/login/UpdatePassword';
+import ForgotPassword from '../views/login/ForgotPassword';
 
 const Rotas = () => {
   return (
