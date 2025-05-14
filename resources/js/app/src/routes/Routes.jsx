@@ -12,6 +12,11 @@ import Login from '../views/login/Login';
 import SignUp from '../views/login/SignUp';
 import UpdatePassword from '../views/login/UpdatePassword';
 import ForgotPassword from '../views/login/ForgotPassword';
+import CategoriaFormList from '../views/categoria/CategoriaFormList';
+import CategoriaFormStore from '../views/categoria/CategoriaFormStore';
+import CategoriaFormDestroy from '../views/categoria/CategoriaFormDestroy';
+import CategoriaFormShow from '../views/categoria/CategoriaFormShow';
+import CategoriaFormUpdate from '../views/categoria/CategoriaFormUpdate';
 
 const Rotas = () => {
   return (
@@ -28,6 +33,12 @@ const Rotas = () => {
         <Route path='/user/destroy/:id' element ={<UserFormDestroy/>}/>
         <Route path='/user/show/:id' element ={<UserFormShow/>}/>
         <Route path='/user/update/:id' element ={<UserFormUpdate/>}/>
+
+        <Route path='/categoria/index' element ={<CategoriaFormList/>}/>
+        <Route path='/categoria/store' element ={<CategoriaFormStore/>}/>
+        <Route path='/categoria/destroy/:id' element ={<CategoriaFormDestroy/>}/>
+        <Route path='/categoria/show/:id' element ={<CategoriaFormShow/>}/>
+        <Route path='/categoria/update/:id' element ={<CategoriaFormUpdate/>}/>
       </Route>
       <Route path="*" element={<NotFound/>}/>
     </Routes>

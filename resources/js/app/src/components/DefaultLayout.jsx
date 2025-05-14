@@ -8,6 +8,7 @@ export default function DefaultLayout({children}){
             <aside>
                 <Link to="/dashboard">Dashboard</Link>
                 <Link to="/user/index" >Usuário</Link>
+                <Link to="/categoria/index" >Categorias</Link>
                 {/*<Link to="/editora/index"/>Editora</Link>*/}
                 {/*<Link to="/autor/index"/>Autor</Link>*/}
                 {/*<Link to="/livro/index"/>Livro</Link>*/}

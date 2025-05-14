@@ -19,7 +19,7 @@ class CategoriaController extends Controller
         $search = $request->get('search','');
 
         $query = Categoria::select('id','nome')
-                ->whereNull('deleted_at')
+                //->whereNull('deleted_at')
                 ->orderBy($props,$dir);
 
         $total = $query->count();
