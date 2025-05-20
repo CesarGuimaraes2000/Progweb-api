@@ -1,11 +1,14 @@
 import { createRef, useState } from "react"
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import axiosClient from "../../AxiosClient";
+import { useLogin } from "../../context/ContextProvider";
 
 export default function Login(){
     
     const emailRef = createRef();
     const passwordRef = createRef();
+    const navigate = useNavigate();
+    const { _setToken, _setUser } = useLogin();
     const [message, setMessage] = useState(null);
     const onSubmit = (e) => {
         e.preventDefault();
@@ -16,7 +19,9 @@ export default function Login(){
         axiosClient.post('/login',login)
                    .then(({data})=>{
                     console.log(data);
-                    localStorage.setItem('TOKEN',data.token);
+                    _setToken(data.token);
+                    _setUser(data.user);
+                    navigate('/dashboard');
                    })
                    .catch((erro)=>{
                     console.log(erro);
@@ -43,7 +48,7 @@ export default function Login(){
                            placeholder="senha" 
                            className = 'p-20'
                            ref = {passwordRef}/>
-                    <button type = 'submit' className="btn btn-block">Login</button>
+                    <button type = 'Submit' className="btn btn-block">Login</button>
 
                     <p className="message">Não está Registrado?  
                     <Link to ="/register">  Criar nova conta</Link></p>

@@ -11,6 +11,7 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 Route::post('/login',[LoginController::class,'login']);
+Route::post('/logout',[LoginController::class,'logout']);
 
 Route::prefix('/user')->group(function(){
     Route::get('/index' ,[UsuarioController::class, 'index'] );

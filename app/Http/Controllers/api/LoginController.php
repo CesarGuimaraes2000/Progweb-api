@@ -21,15 +21,23 @@ class LoginController extends Controller
         
         if(!Hash::check($password,$user->password)){
             return response()->json([
-                'message'=> 'Senha inválida',
+                'message'=> 'Senha inválida : ',
             ]);
         }
 
         $token = $user->createToken($user->name)->plainTextToken;
 
         return response()->json([
-            'email'=>$email,
+            'user'=>$user,
             'token'=>$token,
         ]);
     }
+
+    public function logout(Request $request){
+        $email = $request->email;
+        $user = User::where('email', $email)->first();
+        $user->tokens()->delete;
+        return response('',204);
+    }
+
 }
