@@ -63,7 +63,7 @@ class UsuarioController extends Controller
         $data = User::create([
             'name' =>$request->name,
             'email' =>$request->email,
-            'password' =>Hash::make($request->name)
+            'password' =>Hash::make($request->password)
         ]);
         return response()->json([
             'message'=>"Usuario cadastrado com sucesso",

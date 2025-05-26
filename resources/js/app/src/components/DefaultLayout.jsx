@@ -1,6 +1,7 @@
 import React, { Children } from 'react'
 import { Link, Navigate, useNavigate } from 'react-router-dom'
 import { useLogin } from '../context/ContextProvider'
+import axiosClient from "../AxiosClient";
 
 export default function DefaultLayout({children}){
 
@@ -8,7 +9,7 @@ export default function DefaultLayout({children}){
     const {token, _setUser, _setToken, user} = useLogin();
 
     if(!token){
-        //return <Navigate to = "/login"/>
+        return <Navigate to = "/login"/>
     }
 
     const onLogout = (e) =>{

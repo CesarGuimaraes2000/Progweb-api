@@ -21,6 +21,7 @@ class LoginController extends Controller
         
         if(!Hash::check($password,$user->password)){
             return response()->json([
+                'password'=>$password,
                 'message'=> 'Senha inválida : ',
             ]);
         }

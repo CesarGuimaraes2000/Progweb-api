@@ -3,7 +3,7 @@ import { createContext, useContext, useState } from "react"
 export const LoginContexto = createContext(null);
 
 const ContextProvider = ({children}) => {
-    const [user, setUser] = useState({});
+    const [user, setUser] = useState();
     const [token, setToken] = useState(sessionStorage.getItem('TOKEN'));
 
     const _setToken = (token) => {
