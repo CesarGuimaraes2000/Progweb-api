@@ -19,4 +19,8 @@ class Categoria extends Model
         "updated_at",
         "created_at",
     ];
+
+    public function torrent(){
+        $this->HasMany(Torrent::class);
+    }
 }
