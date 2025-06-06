@@ -6,6 +6,8 @@ use App\Http\Controllers\api\UsuarioController;
 use App\Http\Controllers\api\LoginController;
 use App\Http\Controllers\api\CategoriaController;
 use App\Http\Controllers\api\TorrentController;
+use App\Http\Controllers\api\ComentarioController;
+use App\Http\Controllers\api\FavoritoController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -37,3 +39,20 @@ Route::prefix('/torrent')->group(function(){
     Route::put('/update/{id}' ,[TorrentController::class, 'update'] );
     Route::delete('/destroy/{id}' ,[TorrentController::class, 'destroy'] );
 });
+
+Route::prefix('/favorito')->group(function(){
+    Route::get('/index' ,[FavoritoController::class, 'index'] );
+    Route::get('/show/{id}' ,[FavoritoController::class, 'show'] );
+    Route::post('/store' ,[FavoritoController::class, 'store'] );
+    Route::put('/update/{id}' ,[FavoritoController::class, 'update'] );
+    Route::delete('/destroy/{id}' ,[FavoritoController::class, 'destroy'] );
+});
+
+Route::prefix('/comentario')->group(function(){
+    Route::get('/index' ,[ComentarioController::class, 'index'] );
+    Route::get('/show/{id}' ,[ComentarioController::class, 'show'] );
+    Route::post('/store' ,[ComentarioController::class, 'store'] );
+    Route::put('/update/{id}' ,[ComentarioController::class, 'update'] );
+    Route::delete('/destroy/{id}' ,[ComentarioController::class, 'destroy'] );
+});
+

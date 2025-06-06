@@ -3,9 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Torrent extends Model
 {
+    use SoftDeletes;
     protected $table = 'torrents';
 
     protected $fillable = [
@@ -27,5 +29,13 @@ class Torrent extends Model
 
     public function categoria(){
         $this->belongsTo(Categoria::class);
+    }
+
+    public function comentario(){
+        $this->HasMany(Comentario::class);
+    }
+
+    public function favorito(){
+        $this->HasMany(Favorito::class);
     }
 }

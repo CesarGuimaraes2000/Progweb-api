@@ -4,18 +4,18 @@ const MensagemErro = ({
     error,
     mensagem,
 }) => {
+   const unique = [...new Set(mensagem)];
   return (
     <Fragment>
         {
             error && (
-                <div className='invalid-feedback'>
+                <div className="invalid-feedback">
                     {
-                        mensagem.map((mens,index)=>{
-                            <p key = {index} style ={{margin:"0",color:red}}>
-                                <span>{mens}</span>
-                            </p>
-                        })
-                    }
+                      unique.map((mens, index)=> (
+                        <p key={index} >
+                           <span style={{ margin:"0", color:"red"}}>{mens}</span>
+                         </p>
+                      ))}
                 </div>
             )
         }
@@ -25,5 +25,3 @@ const MensagemErro = ({
 }
 
 export default MensagemErro
-
-0 

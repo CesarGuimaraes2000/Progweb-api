@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers\api;
 
+use App\Http\Controllers\api\FavoritoController;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Http\Exceptions\HttpResponseEception;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use App\Models\Categoria;
+use App\Models\Favorito;
 
-class CategoriaController extends Controller
+class FavoritoController extends Controller
 {
     public function index(Request $request){
         $page = $request->get('page',1);
@@ -18,7 +19,7 @@ class CategoriaController extends Controller
         $props = $request->get('props','id');
         $search = $request->get('search','');
 
-        $query = Categoria::select('id','nome')
+        $query = Favorito::select('id','user_id','torrent_id')
                 ->whereNull('deleted_at')
                 ->orderBy($props,$dir);
 
@@ -31,7 +32,7 @@ class CategoriaController extends Controller
         $totalPages = ceil($total/$pageSize);
         
         return response()->json([
-            'message'=>'Relatório de categorias',
+            'message'=>'Relatório de favoritos',
             'status'=>200,
             'page'=>$page,
             'pageSize'=>$pageSize,
@@ -46,22 +47,24 @@ class CategoriaController extends Controller
 
     public function store(Request $request){
         $validator = Validator::make($request->all(),[
-            'nome'=>'required|string|max:255',
+            'user_id'=>'required|exists:users,id',
+            'torrent_id'=>'required|exists:torrents,id',
         ]);
 
         if($validator->fails()){
             return response()->json([
-                'message'=>'Erro nas informações da categoria',
+                'message'=>'Erro nas informações de favorito',
                 'data'=>$validator->errors(),
                 'status'=>404,
             ],404);
         }
 
-        $data = Categoria::create([
-            'nome' =>$request->nome,
+        $data = Favorito::create([
+            'user_id' => $request->user_id,
+            'torrent_id' => $request->torrent_id,
         ]);
         return response()->json([
-            'message'=>"Categoria cadastrada com sucesso",
+            'message'=>"Favorito cadastrado com sucesso",
             'status'=>200,
             'data'=>$data
         ],200);
@@ -69,16 +72,16 @@ class CategoriaController extends Controller
 
     public function show(Request $request, string $id){
         try{
-            $data = Categoria::findOrFail($id);
+            $data = Favorito::findOrFail($id);
         }
         catch(HttpResponseException $e){
             response()->json(
-                response()->json("Categoria não Localizada"),
+                response()->json("Favorito não Localizado"),
                 404,
             );
         }
         return response()->json([
-            'message'=>"Categoria encontrada com sucesso",
+            'message'=>"Favorito encontrado com sucesso",
             'status'=>200,
             'data'=>$data
         ],200);
@@ -86,46 +89,46 @@ class CategoriaController extends Controller
 
     public function update(Request $request, string $id){
         $validator = Validator::make($request->all(),[
-            'nome'=>'required|string|max:255',
+            'torrent_id'=>'required|exists:torrents,id',
         ]);
 
         if($validator->fails()){
             return response()->json([
-                'message'=>'Erro nas informações da categoria',
+                'message'=>'Erro nas informações de favorito',
                 'data'=>$validator->errors(),
                 'status'=>404,
             ],404);
         }
 
-        $data = Categoria::find($id);
+        $data = Favorito::find($id);
 
         if(!$data){
             return response()->json([
-                'message'=>'Categoria não encontrada',
+                'message'=>'Favorito não encontrado',
                 'data'=> $id,
                 'status'=>404,
             ],404);
         }
-        $data->nome = $request->nome ?? $data->nome;
+        $data->torrent = $request->torrent ?? $data->torrent;
         $data->save();
         return response()->json([
-            'message'=>'Categoria atualizada com sucesso',
+            'message'=>'Favorito atualizado com sucesso',
             'data'=> $data,
             'status'=>200,
         ],200);
     }
 
     public function destroy(string $id){
-        $data = Categoria::find($id);
+        $data = Favorito::find($id);
         if(!$data){
             return response()->json([
-                response()->json("Categoria não Localizada"),
+                response()->json("Favorito não Localizado"),
                 'status'=>404,
             ],404);
         }
         $data->delete();
         return response()->json([
-            'message'=>"Categoria excluida com sucesso",
+            'message'=>"Favorito excluido com sucesso",
             'status'=>200,
         ],200);
     }

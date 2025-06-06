@@ -11,17 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('torrents', function (Blueprint $table) {
+        Schema::create('favoritos', function (Blueprint $table) {
             $table->id('id');
-            $table->string('titulo');
-            $table->string('descricao');
-            $table->integer('tamanho');
-            $table->string('link_magnetico');
             $table->foreignId('user_id')
                   ->constrained('users')
                   ->onDelete('cascade');
-            $table->foreignId('categoria_id')
-                  ->constrained('categorias')
+            $table->foreignId('torrent_id')
+                  ->constrained('torrents')
                   ->onDelete('cascade');
             $table->timestamps();
         });
@@ -32,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('torrents');
+        Schema::dropIfExists('favoritos');
     }
 };

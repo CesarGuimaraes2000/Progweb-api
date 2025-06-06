@@ -53,4 +53,12 @@ class User extends Authenticatable
     public function torrent(){
         $this->HasMany(Torrent::class);
     }
+
+    public function comentario(){
+        $this->HasMany(Comentario::class);
+    }
+
+    public function favorito(){
+        $this->HasMany(Favorito::class);
+    }
 }
