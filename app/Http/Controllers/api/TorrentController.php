@@ -20,7 +20,7 @@ class TorrentController extends Controller
         $search = $request->get('search','');
 
         $query = Torrent::select('id','titulo','descricao','tamanho','link_magnetico','user_id','categoria_id','created_at')
-                //->whereNull('deleted_at')
+                ->whereNull('deleted_at')
                 ->orderBy($props,$dir);
 
         $total = $query->count();

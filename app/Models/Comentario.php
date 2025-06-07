@@ -9,7 +9,7 @@ class Comentario extends Model
 {
     use SoftDeletes;
 
-    protected $table = 'torrents';
+    protected $table = 'comentarios';
 
     protected $fillable = [
         'mensagem',
