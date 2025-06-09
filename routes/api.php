@@ -8,6 +8,10 @@ use App\Http\Controllers\api\CategoriaController;
 use App\Http\Controllers\api\TorrentController;
 use App\Http\Controllers\api\ComentarioController;
 use App\Http\Controllers\api\FavoritoController;
+use App\Http\Controllers\api\FuncionarioController;
+use App\Http\Controllers\api\VeiculoController;
+use App\Http\Controllers\api\ServicoController;
+use App\Http\Controllers\api\GerenciamentoController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -54,5 +58,37 @@ Route::prefix('/comentario')->group(function(){
     Route::post('/store' ,[ComentarioController::class, 'store'] );
     Route::put('/update/{id}' ,[ComentarioController::class, 'update'] );
     Route::delete('/destroy/{id}' ,[ComentarioController::class, 'destroy'] );
+});
+
+Route::prefix('/funcionario')->group(function(){
+    Route::get('/index' ,[FuncionarioController::class, 'index'] );
+    Route::get('/show/{id}' ,[FuncionarioController::class, 'show'] );
+    Route::post('/store' ,[FuncionarioController::class, 'store'] );
+    Route::put('/update/{id}' ,[FuncionarioController::class, 'update'] );
+    Route::delete('/destroy/{id}' ,[FuncionarioController::class, 'destroy'] );
+});
+
+Route::prefix('/veiculo')->group(function(){
+    Route::get('/index' ,[VeiculoController::class, 'index'] );
+    Route::get('/show/{id}' ,[VeiculoController::class, 'show'] );
+    Route::post('/store' ,[VeiculoController::class, 'store'] );
+    Route::put('/update/{id}' ,[VeiculoController::class, 'update'] );
+    Route::delete('/destroy/{id}' ,[VeiculoController::class, 'destroy'] );
+});
+
+Route::prefix('/servico')->group(function(){
+    Route::get('/index' ,[ServicoController::class, 'index'] );
+    Route::get('/show/{id}' ,[ServicoController::class, 'show'] );
+    Route::post('/store' ,[ServicoController::class, 'store'] );
+    Route::put('/update/{id}' ,[ServicoController::class, 'update'] );
+    Route::delete('/destroy/{id}' ,[ServicoController::class, 'destroy'] );
+});
+
+Route::prefix('/gerenciamento')->group(function(){
+    Route::get('/index' ,[GerenciamentoController::class, 'index'] );
+    Route::get('/show/{id}' ,[GerenciamentoController::class, 'show'] );
+    Route::post('/store' ,[GerenciamentoController::class, 'store'] );
+    Route::put('/update/{id}' ,[GerenciamentoController::class, 'update'] );
+    Route::delete('/destroy/{id}' ,[GerenciamentoController::class, 'destroy'] );
 });
 

@@ -1,6 +1,6 @@
 import {createRef, useState} from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import axiosClient from '../../axiosClient';
+//import axiosClient from '../../axiosClient';
 import { useLogin } from '../../context/ContextProvider';
 import { useValidarDadosLogin } from '../../rules/LoginValidationRules';
 import MensagemErro from '../../components/messages/MensagemErro';

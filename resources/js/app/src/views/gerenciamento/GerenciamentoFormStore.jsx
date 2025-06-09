@@ -4,42 +4,50 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
 import { Link } from 'react-router-dom';
 
-export default function CategoriaFormStore(){
+export default function GerenciamentoFormStore(){
     const navigate = useNavigate();
-    const [categoria, setCategoria] = useState({
+
+    const [gerenciamento, setGerenciamento] = useState({
         id: null,
-        nome: '',
+        funcionario_id: '',
+        servico_id: ''
     });
     
     const onSubmit = (e) =>{
         e.preventDefault();
-        axiosClient.post('/categoria/store', categoria)
+        axiosClient.post('/gerenciamento/store', gerenciamento)
             .then(()=>{
-             setCategoria({});
-             console.log("Categoria salva com sucesso");
-             navigate('/categoria/index');
+             setGerenciamento({});
+             console.log("Gerenciamento salvo com sucesso");
+             navigate('/gerenciamento/index');
             })
             .catch((error)=>{
                 console.log(error);
             });
     }
     const onCancel = () =>{
-        navigate('/categoria/index');
+        navigate('/gerenciamento/index');
     }
     return(
         <Fragment>
             <div className = "display">
                 <div className="card animated fadeinDown">
-                    <h1>Inclusão de Categoria</h1>
+                    <h1>Inclusão de Gerenciamento</h1>
                     <form onSubmit={(e) => onSubmit(e)}>
-                        <input value={categoria.nome} placeholder="Nome"
+                        <input value={gerenciamento.servico_id} placeholder="Servico"
                         onChange={
-                            e => setCategoria({
-                                ...categoria, nome:e.target.value
+                            e => setGerenciamento({
+                                ...gerenciamento, servico_id:e.target.value
+                            })
+                        }/>
+                        <input value={gerenciamento.funcionario_id} placeholder="Funcionário"
+                        onChange={
+                            e => setGerenciamento({
+                                ...gerenciamento, funcionario_id:e.target.value
                             })
                         }/>
                         <Link type="button" className = "btn btn-cancel"
-                            to ="/categoria/index">
+                            to ="/gerenciamento/index">
                             Cancelar
                         </Link>
                         <button className="btn-add">Salvar</button>

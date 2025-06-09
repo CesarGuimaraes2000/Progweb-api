@@ -9,7 +9,7 @@ export default function DefaultLayout({children}){
     const {token, _setUser, _setToken, user} = useLogin();
 
     if(!token){
-        return <Navigate to = "/login"/>
+        //return <Navigate to = "/login"/>
     }
 
     const onLogout = (e) =>{
@@ -30,9 +30,13 @@ export default function DefaultLayout({children}){
                 <Link to="/dashboard">Dashboard</Link>
                 <Link to="/user/index" >Usuário</Link>
                 <Link to="/categoria/index" >Categorias</Link>
-                {/*<Link to="/editora/index"/>Editora</Link>*/}
-                {/*<Link to="/autor/index"/>Autor</Link>*/}
-                {/*<Link to="/livro/index"/>Livro</Link>*/}
+                <Link to="/torrent/index" >Torrents</Link>
+                <Link to="/comentario/index" >Comentários</Link>
+                <Link to="/favorito/index" >Favoritos</Link>
+                <Link to='/funcionario/index'>Funcionários</Link>
+                <Link to='/veiculo/index'>Veículos</Link>
+                <Link to='/servico/index'>Serviços</Link>
+                <Link to='/gerenciamento/index'>Gerenciamentos</Link>
             </aside>
             <div className='content'>
                 <header>
@@ -40,7 +44,8 @@ export default function DefaultLayout({children}){
                         Sistema de controle
                     </div>
                     <div>
-                        {user.name} &nbsp; &nbsp;
+                        {/* {user.name} &nbsp; &nbsp; */}
+                        Cesar
                     </div>
                     <button onClick={onLogout} className='btn-logout' href='#'>
                         Logout

@@ -99,7 +99,8 @@ form-control:focus{
   color: #28a745;
 }
 
-input{
+input,
+select{
   outline: 0;
   background: #c9c1c1;
   width: 100%;
@@ -112,7 +113,8 @@ input{
   font-weight: 580;
 } 
 
-input:focus{
+input:focus,
+select:focus{
   border: 2px solid #00a762
 }
 

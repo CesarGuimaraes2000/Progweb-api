@@ -61,4 +61,8 @@ class User extends Authenticatable
     public function favorito(){
         $this->HasMany(Favorito::class);
     }
+
+    public function veiculo(){
+        $this->HasMany(Veiculo::class);
+    }
 }

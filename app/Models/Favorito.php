@@ -24,7 +24,8 @@ class Favorito extends Model
         $this->belongsTo(User::class);
     }
 
-    public function torrent(){
-        $this->belongsTo(Torrent::class);
+    public function torrent()
+    {
+        return $this->belongsTo(Torrent::class, 'torrent_id');
     }
 }

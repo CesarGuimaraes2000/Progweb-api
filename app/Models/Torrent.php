@@ -36,6 +36,6 @@ class Torrent extends Model
     }
 
     public function favorito(){
-        $this->HasMany(Favorito::class);
+       $this->HasMany(Favorito::class);
     }
 }
