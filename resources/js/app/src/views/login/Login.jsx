@@ -7,7 +7,7 @@ import MensagemErro from '../../components/messages/MensagemErro';
 
 export default function Login(){
 
-    const { model, error, formValid, handleChangeField, validateAll } = useValidarDadosLogin();
+    const { model, error, formValid, handleChangeField, handleBlurField} = useValidarDadosLogin();
 
     const navigate = useNavigate();
     const { _setToken, _setUser } = useLogin();
@@ -67,20 +67,13 @@ export default function Login(){
                            name="email"
                            value={model.email}
                            onChange={handleChangeField}
+                           onBlur={handleBlurField}
                         />
                         {
                             <MensagemErro
                                error = {error.email}
                                mensagem = {error.emailMensagem}
                             />
-                                // <div className='invalid-feedback'> {
-                                //     error.emailMensagem.map((mens, index)=> {
-                                //         return (
-                                //             <p key={index} >
-                                //                 <span style={{ margin:"0", color:"red" }}>{mens}</span>
-                                //             </p>
-                                //         )})}
-                                // </div>
                         }
                 </div>
                 <div className='p-20'>
@@ -90,20 +83,13 @@ export default function Login(){
                           name="password"
                           value={model.password}
                           onChange={handleChangeField}
+                          onBlur={handleBlurField}
                        />
                        {
                          <MensagemErro
                             error = {error.password}
                             mensagem = {error.passwordMensagem}
                          />
-                            // <div className='invalid-feedback'> {
-                            //     error.passwordMensagem.map((mens, index)=> {
-                            //         return (
-                            //             <p key={index} >
-                            //                 <span style={{ margin:"0", color:"red" }}>{mens}</span>
-                            //             </p>
-                            //     )})}
-                            // </div>
                        }
                 </div>
                 <button type="submit"

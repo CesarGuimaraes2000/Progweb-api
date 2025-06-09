@@ -3,21 +3,21 @@ import axiosClient from "../../AxiosClient";
 import { useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
 import { Link } from 'react-router-dom';
+import { useValidarDadosUser } from "../../rules/UserValidationRules";
+import Input from "../../components/input/Input";
 
 export default function UserFormUpdate(){
     const navigate = useNavigate();
-    const [user, setUser] = useState({
-        id: null,
-        name: '',
-        email: '',
-    });
+
+    const { model, error, setModel, formValid, handleChangeField, handleBlurField} = useValidarDadosUser();
+
     const { id } = useParams();
+
     if(id){
         useEffect(() => {
             axiosClient.get(`/user/show/${id}`)
             .then(({data})=>{
-             //console.log(data.data);
-             setUser(data.data);
+             setModel(data.data);
             })
             .catch((error)=>{
                 console.log(error);
@@ -26,15 +26,18 @@ export default function UserFormUpdate(){
     }
     const onSubmit = (e) =>{
         e.preventDefault();
-        axiosClient.put(`/user/update/${id}`, user)
-            .then(()=>{
-             setUser({});
-             console.log("Usuário alterado com sucesso");
-             navigate('/user/index');
-            })
-            .catch((error)=>{
-                console.log(error);
-            });
+        console.log(model);
+        if(formValid()){
+            axiosClient.put(`/user/update/${id}`, model)
+                .then(()=>{
+                setModel({});
+                console.log("Usuário alterado com sucesso");
+                navigate('/user/index');
+                })
+                .catch((error)=>{
+                    console.log(error);
+                });
+        }
     }
     const onCancel = () =>{
         navigate('/user/index');
@@ -43,20 +46,28 @@ export default function UserFormUpdate(){
         <Fragment>
             <div className = "display">
                 <div className="card animated fadeinDown">
-                    {user.id && <h1>Alteração de Usuário</h1>}
+                    {model.id && <h1>Alteração de Usuário</h1>}
                     <form onSubmit={(e) => onSubmit(e)}>
-                        <input value={user.name} placeholder="Nome do Usuário"
-                        onChange={
-                            e => setUser({
-                                ...user, name:e.target.value
-                            })
-                        }/>
-                        <input value={user.email} placeholder="Email do Usuário"
-                        onChange={
-                            e => setUser({
-                                ...user, email:e.target.value
-                            })
-                        }/>
+                        <Input 
+                            id = "name"
+                            type = "text"
+                            value={model.name}
+                            placeholder="Nome"
+                            handleChangeField={handleChangeField}
+                            handleBlurField={handleBlurField}
+                            error={error.name}
+                            mensagem={error.nameMensagem}
+                        />
+                        <Input 
+                            id = "email"
+                            type = "text"
+                            value={model.email}
+                            placeholder="E-mail"
+                            handleChangeField={handleChangeField}
+                            handleBlurField={handleBlurField}
+                            error={error.email}
+                            mensagem={error.emailMensagem}
+                        />
                         <Link type="button" className = "btn btn-cancel"
                             to ="/user/index">
                             Cancelar

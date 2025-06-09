@@ -13,6 +13,12 @@ const useValidator = (initialModel, errorModel, validationRules) =>{
         }));
     }
 
+    const handleBlurField = ( e ) => {
+        const { name} = e.target;
+        let erros = validBlurInput(name);
+        setError(erros);
+    }
+
     const hasErrors = (erros) => {
         return Object.values(erros).some(value => value === true);
     }
@@ -29,8 +35,18 @@ const useValidator = (initialModel, errorModel, validationRules) =>{
                              mensagens.some(msg => typeof msg === 'string' && msg.trim().length > 0);
 
             erros[field] = hasErros; // true ou false
-            console.log(erros);
         })
+        return erros;
+    }
+
+    const validBlurInput = (field) => {
+        let erros = {...error};
+        const validationFunction = validationRules[field];
+        if(validationFunction){
+            const value = model[field];
+            erros[`${field}Mensagem`] = validationFunction(value, model);
+            erros[field] = !!(erros[`${field}Mensagem`] && erros[`${field}Mensagem`].length>0);
+        }
         return erros;
     }
 
@@ -48,6 +64,7 @@ const useValidator = (initialModel, errorModel, validationRules) =>{
         error,
         setError,
         handleChangeField,
+        handleBlurField,
         formValid,
     }
 
