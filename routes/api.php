@@ -19,6 +19,8 @@ Route::get('/user', function (Request $request) {
 
 Route::post('/login',[LoginController::class,'login']);
 Route::post('/logout',[LoginController::class,'logout']);
+Route::post('/recover',[LoginController::class,'recover']);
+Route::post('/sendConfirmationMail',[LoginController::class,'sendConfirmationMail']);
 
 Route::prefix('/user')->group(function(){
     Route::get('/index' ,[UsuarioController::class, 'index'] );

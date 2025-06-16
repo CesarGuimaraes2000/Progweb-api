@@ -1,28 +1,49 @@
 import React, { Children } from 'react'
 import { Link, Navigate, useNavigate } from 'react-router-dom'
 import { useLogin } from '../context/ContextProvider'
-import axiosClient from "../AxiosClient";
+import axiosClient from "../axiosClient";
+import logo from '../assets/logo.png';
+import { useValidarDadosLogin } from '../rules/LoginValidationRules';
+import { useState ,useEffect} from "react";
 
 export default function DefaultLayout({children}){
-
     const navigate = useNavigate();
-    const {token, _setUser, _setToken, user} = useLogin();
-
+    const {token, _setUser, _setToken} = useLogin();
+    const [user, setUser] = useState({
+            id: null,
+            name: '',
+            email: '',
+        });
+    const id = localStorage.getItem('Id');
+    console.log(id);
     if(!token){
-        //return <Navigate to = "/login"/>
+        return <Navigate to = "/login"/>
+    }
+    if(id){
+        useEffect(() => {
+            axiosClient.get(`user/show/${id}`)
+            .then(({data})=>{
+             console.log(data.data);
+             setUser(data.data);
+            })
+            .catch((error)=>{
+                console.log(error);
+            });
+        },[id]);
     }
 
     const onLogout = (e) =>{
-        e.preventDefault();
-        axiosClient.post('/login', user.email)
+        /* e.preventDefault();
+        console.log(user);
+        axiosClient.post('/logout')
                    .then(()=>{
-                    _setUser = ({});
-                    _setToken = (null);
+                    _setUser({});
+                    _setToken(null);
                     navigate('/login');
                    })
                    .catch((erro)=>{
                     console.log(erro);
-                   })
+                   }) */
     }
     return(
         <div id="defaultLayout">
@@ -40,12 +61,12 @@ export default function DefaultLayout({children}){
             </aside>
             <div className='content'>
                 <header>
+                    <img className = 'header_logo' src={logo} alt="Logo" style={{ width: '120px' }}/>
                     <div className='header'>
-                        Sistema de controle
+                        Magnet BR
                     </div>
                     <div>
-                        {/* {user.name} &nbsp; &nbsp; */}
-                        Cesar
+                        {user.name} &nbsp; &nbsp;
                     </div>
                     <button onClick={onLogout} className='btn-logout' href='#'>
                         Logout

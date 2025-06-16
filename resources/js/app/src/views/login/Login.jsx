@@ -1,6 +1,6 @@
 import {createRef, useState} from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-//import axiosClient from '../../axiosClient';
+import axiosClient from '../../axiosClient';
 import { useLogin } from '../../context/ContextProvider';
 import { useValidarDadosLogin } from '../../rules/LoginValidationRules';
 import MensagemErro from '../../components/messages/MensagemErro';
@@ -31,21 +31,21 @@ export default function Login(){
        console.log(error)
 
 
-    //    const login = {
-    //       email: emailRef.current.value,
-    //       password: passwordRef.current.value
-    //    }
+      const login = {
+           email: model.email,
+           password: model.password
+        }
 
-    //    axiosClient.post('/login', login)
-    //               .then(({data})=>{
-    //                 _setToken(data.token);
-    //                 _setUser(data.user);
-    //                 setMessage('login realizado com sucesso '+login);
-    //                 navigate('/dashboard');
-    //               })
-    //               .catch((erro)=>{
-    //                 console.log(erro);
-    //               })
+        axiosClient.post('/login', login)
+                   .then(({data})=>{
+                     _setToken(data.token);
+                     _setUser(data.user);
+                     setMessage('login realizado com sucesso '+login);
+                     navigate('/dashboard');
+                   })
+                   .catch((erro)=>{
+                     console.log(erro);
+                   }) 
 
 
     }
@@ -95,6 +95,7 @@ export default function Login(){
                 <button type="submit"
                    className='btn btn-block p-20'>Login</button>
                 <p className='message'>Não está Registrado? <Link to="/register">Criar nova conta</Link></p>
+                <p className='message'>Esqueceu Sua Senha? <Link to="/forgotpassword">Recuperar Conta</Link></p>
             </form>
 
         </div>

@@ -1,5 +1,5 @@
 import { Fragment} from "react";
-import axiosClient from "../../AxiosClient";
+import axiosClient from "../../axiosClient";
 import { useNavigate} from "react-router-dom";
 import { Link } from 'react-router-dom';
 import { useValidarDadosUser } from "../../rules/UserValidationRules";
@@ -7,7 +7,6 @@ import Input from "../../components/input/Input";
 
 export default function UserFormStore(){
     const navigate = useNavigate();
-
     const { model, error,setModel, formValid, handleChangeField, handleBlurField} = useValidarDadosUser();
 
     const onSubmit = (e) =>{

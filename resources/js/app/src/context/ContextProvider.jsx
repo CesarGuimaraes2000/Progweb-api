@@ -19,6 +19,7 @@ const ContextProvider = ({children}) => {
     const _setUser = (user) => {
         setUser(user);
         localStorage.setItem('User',user.name);
+        localStorage.setItem('Id',user.id);
     }
 
     return (

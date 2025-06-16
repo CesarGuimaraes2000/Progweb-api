@@ -1,5 +1,5 @@
 import { Fragment, useEffect } from "react";
-import axiosClient from '../../AxiosClient';
+import axiosClient from '../../axiosClient';
 import { useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
 import { Link } from 'react-router-dom';

@@ -10,6 +10,7 @@ import Dashboard from '../components/Dashboard';
 import NotFound from '../views/NotFound';
 import Login from '../views/login/Login';
 import SignUp from '../views/login/SignUp';
+import EmailConfirmation from '../views/login/EmailConfirmation';
 import UpdatePassword from '../views/login/UpdatePassword';
 import ForgotPassword from '../views/login/ForgotPassword';
 import CategoriaFormList from '../views/categoria/CategoriaFormList';
@@ -60,6 +61,7 @@ const Rotas = () => {
       <Route path='/register' element={<SignUp/>}/>
       <Route path='/updatepassword' element={<UpdatePassword/>}/>
       <Route path='/forgotpassword' element={<ForgotPassword/>}/>
+      <Route path='/emailconfirmation' element={<EmailConfirmation/>}/>
       <Route element={<Layout/>}>
         <Route path='/dashboard' element={<Dashboard/>}/>
         <Route path='/user/index' element ={<UserFormList/>}/>
