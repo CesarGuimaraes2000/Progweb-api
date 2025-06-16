@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\api\UsuarioController;
+use App\Http\Controllers\api\RegisterUserController;
+use App\Http\Controllers\api\VerifyUserAccount;
 use App\Http\Controllers\api\LoginController;
 use App\Http\Controllers\api\CategoriaController;
 use App\Http\Controllers\api\TorrentController;
@@ -21,6 +23,8 @@ Route::post('/login',[LoginController::class,'login']);
 Route::post('/logout',[LoginController::class,'logout']);
 Route::post('/recover',[LoginController::class,'recover']);
 Route::post('/sendConfirmationMail',[LoginController::class,'sendConfirmationMail']);
+Route::post('/signup',[RegisterUserController::class,'signup']);
+Route::get('/verify_account',[VerifyUserAccount::class,'verifyUserAccount']);
 
 Route::prefix('/user')->group(function(){
     Route::get('/index' ,[UsuarioController::class, 'index'] );

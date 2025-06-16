@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
@@ -23,6 +25,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'ativo',
     ];
 
     /**
@@ -64,5 +67,35 @@ class User extends Authenticatable
 
     public function veiculo(){
         $this->HasMany(Veiculo::class);
+    }
+
+    public static function sendVerificationEmail($user){
+        $activateCode = bcrypt(Str::random(15));
+        $user->remember_token = $activateCode;
+        $user->save();
+        $viewData['Nome'] = $user->name;
+        $emailCode = $user->remember_token;
+        $viewData['link'] = asset('/api/verify_account?token' .$emailCode);
+        Mail::send('layouts.email_verification',$viewData,function($m) use ($user){
+            $m->from(env('MAIL_FROM_ADDRESS'), env('APP_NAME'));
+            $m->to($user->email, $user->name)->subject('Confirmação de usuário');
+        });
+    }
+
+    public static function sendEmailUserActivated($user){
+        $viewData['Nome'] = $user->name;
+        $viewData['link'] = asset('http://localhost:3000/login');
+        Mail::send('layouts.email_verification',$viewData,function($m) use ($user){
+            $m->from(env('MAIL_FROM_ADDRESS'), env('APP_NAME'));
+            $m->to($user->email, $user->name)->subject('Usuário registrado com sucesso');
+        });
+    }
+
+    public static function sendEmailUserActivatedFailed($user){
+        $viewData['Nome'] = $user->name;
+        Mail::send('layouts.email_verification',$viewData,function($m) use ($user){
+            $m->from(env('MAIL_FROM_ADDRESS'), env('APP_NAME'));
+            $m->to($user->email, $user->name)->subject('Usuário já está ativado no sistema ou o link está expirado');
+        });
     }
 }
