@@ -3,7 +3,7 @@ import axiosClient from "../../axiosClient";
 import { useNavigate} from "react-router-dom";
 import { Link } from 'react-router-dom';
 import { useValidarDadosUserRegistro } from "../../rules/UserRegistroValidationRules";
-import Input from "../../components/input/Input";
+import PasswordInput from "../../components/input/PasswordInput";
 
 export default function UpdatePassword(){
 
@@ -49,7 +49,7 @@ export default function UpdatePassword(){
                 <div className="form">
                     <form onSubmit={(e) => onSubmit(e)}>
                         <h1 className="title">Nova Senha</h1>
-                        <Input 
+                        <PasswordInput 
                             id = "password"
                             type = "password"
                             value={model.password}
@@ -59,7 +59,7 @@ export default function UpdatePassword(){
                             error={error.password}
                             mensagem={error.passwordMensagem}
                         />
-                        <Input 
+                        <PasswordInput 
                             id = "confirmPassword"
                             type = "password"
                             value={model.confirmPassword}

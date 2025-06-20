@@ -4,6 +4,7 @@ import { useNavigate} from "react-router-dom";
 import { Link } from 'react-router-dom';
 import { useValidarDadosUserRegistro } from "../../rules/UserRegistroValidationRules";
 import Input from "../../components/input/Input";
+import PasswordInput from "../../components/input/PasswordInput";
 
 export default function SignUp(){
     const navigate = useNavigate();
@@ -50,7 +51,7 @@ export default function SignUp(){
                             error={error.email}
                             mensagem={error.emailMensagem}
                         />  
-                        <Input 
+                        <PasswordInput 
                             id = "password"
                             type = "password"
                             value={model.password}
@@ -60,7 +61,7 @@ export default function SignUp(){
                             error={error.password}
                             mensagem={error.passwordMensagem}
                         />
-                        <Input 
+                        <PasswordInput 
                             id = "confirmPassword"
                             type = "password"
                             value={model.confirmPassword}

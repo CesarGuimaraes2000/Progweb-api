@@ -1,9 +1,11 @@
-import {createRef, useState} from 'react';
+import {createRef, Fragment, useState} from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axiosClient from '../../axiosClient';
 import { useLogin } from '../../context/ContextProvider';
 import { useValidarDadosLogin } from '../../rules/LoginValidationRules';
 import MensagemErro from '../../components/messages/MensagemErro';
+import Input from "../../components/input/Input";
+import PasswordInput from "../../components/input/PasswordInput";
 
 export default function Login(){
 
@@ -46,61 +48,49 @@ export default function Login(){
                    .catch((erro)=>{
                      console.log(erro);
                    }) 
-
-
     }
     return(
-      <div className="login-signup-form animated fadeInDown">
-        <div className="form">
-            <form onSubmit={onSubmit}>
-                <h1 className="title p-20">Acesso ao Sistema</h1>
-                {
-                    message &&
-                    <div className='alert'>
-                    <p>{message}</p>
-                    </div>
-                }
-                <div className='p-20'>
-                    <input type="text"
-                           placeholder='E-mail'
-                           className={getInputClass(error.email)}
-                           name="email"
-                           value={model.email}
-                           onChange={handleChangeField}
-                           onBlur={handleBlurField}
+      <Fragment>
+        <div className="login-signup-form animated fadeInDown">
+          <div className="form">
+            <h1 className="title p-20">Acesso ao Sistema</h1>
+                  {
+                      message &&
+                      <div className='alert'>
+                      <p>{message}</p>
+                      </div>
+                  }
+              <form onSubmit={(e) => onSubmit(e)}>
+                  <Input 
+                            id = "email"
+                            type = "text"
+                            value={model.email}
+                            placeholder="E-mail"
+                            handleChangeField={handleChangeField}
+                            handleBlurField={handleBlurField}
+                            error={error.email}
+                            mensagem={error.emailMensagem}
+                        />  
+                        <PasswordInput 
+                            id = "password"
+                            type = "password"
+                            value={model.password}
+                            placeholder="Senha"
+                            handleChangeField={handleChangeField}
+                            handleBlurField={handleBlurField}
+                            error={error.password}
+                            mensagem={error.passwordMensagem}
                         />
-                        {
-                            <MensagemErro
-                               error = {error.email}
-                               mensagem = {error.emailMensagem}
-                            />
-                        }
-                </div>
-                <div className='p-20'>
-                   <input type="password"
-                          placeholder='Senha'
-                          className={getInputClass(error.password)}
-                          name="password"
-                          value={model.password}
-                          onChange={handleChangeField}
-                          onBlur={handleBlurField}
-                       />
-                       {
-                         <MensagemErro
-                            error = {error.password}
-                            mensagem = {error.passwordMensagem}
-                         />
-                       }
-                </div>
-                <button type="submit"
-                   className='btn btn-block p-20'>Login</button>
-                <p className='message'>Não está Registrado? <Link to="/register">Criar nova conta</Link></p>
-                <p className='message'>Esqueceu Sua Senha? <Link to="/forgotpassword">Recuperar Conta</Link></p>
-            </form>
+                  <button type="submit"
+                    className='btn btn-block p-20'>Login</button>
+                  <p className='message'>Não está Registrado? <Link to="/register">Criar nova conta</Link></p>
+                  <p className='message'>Esqueceu Sua Senha? <Link to="/forgotpassword">Recuperar Conta</Link></p>
+              </form>
+
+          </div>
 
         </div>
-
-      </div>
+      </Fragment>
 
     )
 

@@ -5,6 +5,11 @@ const useValidator = (initialModel, errorModel, validationRules) =>{
 
     const [model, setModel] = useState(initialModel);
     const [error, setError] = useState(errorModel);
+    const [showPassword, setShowPassword] = useState(false);
+
+    const handleClick = () => {
+        setShowPassword(!showPassword);
+    }
 
     const handleChangeField = ( e ) => {
         const { name, value } = e.target;
@@ -65,6 +70,7 @@ const useValidator = (initialModel, errorModel, validationRules) =>{
         setError,
         handleChangeField,
         handleBlurField,
+        handleClick,
         formValid,
     }
 
